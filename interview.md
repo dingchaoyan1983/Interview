@@ -13,7 +13,7 @@ obj.c();
 
 # 2:
 ```
-function() arrayPrint1(array) {
+function arrayPrint1(array) {
   array.forEach(function(item) {
     window.setTimeout(function() {
       console.log(item);
@@ -25,7 +25,7 @@ arrayPrint1([1, 2, 3, 4, 5]);
 ```
 
 ```
-function() arrayPrint2(array) {
+function arrayPrint2(array) {
   for(var i = 0; i < array.length; i++) {
     window.setTimeout(function() {
       console.log(array[i]);
