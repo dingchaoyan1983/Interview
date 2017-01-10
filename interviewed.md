@@ -54,3 +54,34 @@ function unique(arr) {
     return Object.keys(temp);
 }
 ```
+
+Q: 有一个链表如下：
+
+```
+let linkedArray = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: null
+        }
+    }
+}
+```
+写一个程序将这个链表反转？
+
+A:
+```
+function reverse(linkedArray) {
+   let cursor = linkedArray;
+
+   cursor.prev = null;
+   while(cursor.next) {
+       cursor.next.prev = cursor;
+       cursor = cursor.next;
+   }
+
+   return cursor;
+}
+```
