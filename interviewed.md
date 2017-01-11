@@ -86,17 +86,65 @@ function reverse(linkedArray) {
 }
 ```
 
-Q: 写一个排序算法
+排序算法中`swap` 函数：
+```
+function swap(arr, i, j) {
+    var temp = null;
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+```
+
+Q: 冒泡排序算法
+思路： 将数组中的相邻的2个元素进行比较，如果满足对比条件，则交换位置，第一次循环次数为数组的长度，第二次则比第一次少一，以此类推，循环完毕则排序完毕
 ```
 function bubbleSort(arr) {
-    for(let i = 0; i < arr.length; i++) {
-        for(let j = 0; j < arr.length - i; j++) {
+    for(var i = 0; i < arr.length; i++) {
+        for(var j = 0; j < arr.length - i; j++) {
             if (arr[j] > arr[j+1]) {
-                let temp = arr[j+1];
-                arr[j+1] = arr[j];
-                arr[j] = temp;
+                swap(arr, j, j+1);
             }
         }
     }
+
+    return arr;
+}
+```
+
+Q： 快速排序算法
+思路： 在数组中找到一个平衡点，是这个平衡点的左边的元素都小于该元素，而右边的元素则都大于该元素，然后从这个平衡点的位置切分成2个数组在进行该过程，直到退出，则排序完成
+
+```
+function quickSort(arr) {
+    qSort(arr, 0, arr.length - 1);
+    return arr;
+}
+
+function qSort(arr, low, high) {
+ var pivot; 
+ if(low < high) {
+     pivot = partition(arr, low, high);  
+     qSort(arr, low, pivot);
+     qSort(arr, pivot+1, high);
+ } 
+}
+
+function partition(arr, low, high) {
+    //假设取low为基准值
+    var pivotValue = arr[low];
+    while(low<high) {
+        //从最右端扫描数组，如果发现右边有一个值比这个基准值小，则交换它与基准值的位置这个时候基准值的位置将变为high
+        while(low < high && arr[high] >= pivotValue) {
+            high--;
+        }
+        swap(arr, low, high);
+        //交换之后，基准值在数组里面的位置变为high，这个时候在比较这个基准值左边的元素，如果发现左边有元素比它大，则交换位置
+        while(low < high && arr[low] <= pivotValue) {
+            low++;
+        }
+        swap(arr, low, high);
+    }
+    return low;
 }
 ```
