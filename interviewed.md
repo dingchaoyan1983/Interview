@@ -225,7 +225,7 @@ Promise.prototype = {
 }
 ```
 
-Q: 从一个字符串里面找出最大的没有重复字符的字符子串，例如:`abcdeafd`, 得到结果 `["abcde", "bcdeaf", "cdeaf", "deaf", "eafd"]` 这个题目当时是没有解出来，经过提示，面试下来之后
+Q: 从一个字符串里面找出最大的没有重复字符的字符子串，例如:`abcdeafd`, 得到结果 `["abcde", "bcdeaf", "cdeaf", "deaf", "eafd", "afd", "fd", "d"]` 这个题目当时是没有解出来，经过提示，面试下来之后
 依照这个提示做出来的这个算法，虽然当时没有答出来，也算是给自己增加经验吧。
 
 ```
@@ -236,19 +236,20 @@ Q: 从一个字符串里面找出最大的没有重复字符的字符子串，�
         var strs = [];
         var str = '';
         while(true) {
-          if(endCursor < arr.length) {
-            if(str.indexOf(arr[endCursor]) === -1) {
+          if(endCursor <= arr.length) {
+            if(arr[endCursor] && str.indexOf(arr[endCursor]) === -1) {
                 str = str.concat(arr[endCursor]);
                 endCursor++;
             } else {
-                strs.push(str);
+                if(str.length) {
+                  strs.push(str);
+                }
                 //reset the string
                 str = '';
                 startCursor++;
                 endCursor =  startCursor;
             }
           } else {
-            strs.push(str);
             break;
           }
         }
